@@ -1,0 +1,25 @@
+{
+  "name": "wanderlust",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/rakheshr2005/wanderlust#readme",
+  "bugs": {
+    "url": "https://github.com/rakheshr2005/wanderlust/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rakheshr2005/wanderlust.git"
+  },
+  "license": "ISC",
+  "author": "Rakhesh R",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs": "^5.0.1",
+    "express": "^5.2.1",
+    "mongoose": "^9.3.0"
+  }
+}
