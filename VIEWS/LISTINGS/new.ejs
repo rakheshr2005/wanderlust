@@ -1,20 +1,21 @@
 <% layout('layouts/boilerplate') %>
-<body>
     <br><br>
     <div class="row"></div>
     
     
         <div class="col-8 offset-2">
             <h3>Create A New Listing</h3>
-    <form method="post" action="/listings">
+    <form method="post" action="/listings" novalidate class="needs-validation">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" name="listing[title]" id="title" placeholder="Add a cathcy title" class="form-control">
+            <input type="text" name="listing[title]" id="title" placeholder="Add a cathcy title" class="form-control" required>
+            <div class="valid-feedback">Title Looks Good</div>
         </div>
 
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea name="listing[description]" id="description" class="form-control"></textarea>
+            <textarea name="listing[description]" id="description" class="form-control" required></textarea>
+            <div class="invalid-feedback">Description should not be empty</div>
         </div>
 
         <div class="mb-3">
@@ -25,12 +26,14 @@
 
         <div class="mb-3 col-md-4">
             <label for="price" class="form-label">Price</label>
-            <input type="number" name="listing[price]" id="price" placeholder="1200" class="form-control">
+            <input type="number" name="listing[price]" id="price" placeholder="1200" class="form-control" required>
+            <div class="invalid-feedback">Enter valid price</div>
         </div>
 
         <div class="mb-3 col-md-8">
         <label for="country" class="form-label">Country</label>
-        <input type="text" name="listing[country]" id="country"placeholder="India" class="form-control">
+        <input type="text" name="listing[country]" id="country"placeholder="India" class="form-control" required>
+        <div class="invalid-feedback">Country name cannot be empty</div>
         </div>
 
         </div>
@@ -38,7 +41,8 @@
 
         <div class="mb-3">
         <label for="location" class="form-label">Location</label>
-        <input type="text" name="listing[location]" id="location"placeholder="Jaipur,Rajasthan" class="form-control">
+        <input type="text" name="listing[location]" id="location"placeholder="Jaipur,Rajasthan" class="form-control" required>
+        <div class="invalid-feedback">Location  cannot be empty</div>
         </div>
 
      
@@ -47,4 +51,4 @@
     </div>
     </div>
     <br><br>
-</body>
+
