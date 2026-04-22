@@ -1,14 +1,14 @@
 <% layout('layouts/boilerplate') %>
 <div class="row mt-3">
     <div class="col-8 offset-3">
-        <h3>LISTING DETAILS</h3>
+         <h2 class="show-h2"><%= listing.title %></h2>
 
-<div class="card col-8 offset-0">
+<div class="card col-8 offset-0 listing-card">
   <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_img">
   <div class="card-body">
     <p class="card-text">
     
-        <b><%= listing.title %></b><br>
+       
         <%= listing.description %> <br>
         &#x20B9;<%= listing.price.toLocaleString("en-IN") %> <br>
         <%= listing.location %> <br>
@@ -25,4 +25,46 @@
     <form  method="post" action="/listings/<%= listing._id %>?_method=Delete">
         <button class="btn btn-dark  offset-5">Delete</button>
     </form>
+  </div>
+    <div class="card col-8 offset-3 mt-4 mb-6 listing-card">
+      <h2>Leave a Review</h2>
+      <form action="/listings/<%= listing._id %>/reviews" method="post" novalidate class="needs-validation">
+
+      <div>
+        <label for="rating"class="form-label">Rating</label>
+        <input type="range" name="review[rating]" id="rating" min="1" max="5" class="form-range">
+      </div>
+
+       <div>
+        <label for="comment"class="form-label">Comment</label>
+        <textarea name="review[comment]" id="comment" cols="30" rows="5" class="form-control" required></textarea>
+        <div class="invalid-feedback">comment cannot be empty</div>
+      </div>
+      <br><br>
+
+      <button class="btn btn-dark ">Submit</button>
+      </form>
+      <br><br>
+
+      <h2>All Reviews</h2>
+    
+      <div class="row">
+        <% for(review of listing.reviews){ %>
+          <div class="card col-5 ms-3 mb-3">
+          <h5 class="card-title">Unknown</h5>
+          <p class="card-text"> <%= review.comment %></p>
+          <p class="card-text"> <%= review.rating %> stars</p>
+          <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="post">
+          <button class="mb-3 btn btn-dark">Delete</button>
+        </form>
+          </div>
+        <%  } %>
+        
     </div>
+    </div>
+     
+    </div>
+
+  
+
+
