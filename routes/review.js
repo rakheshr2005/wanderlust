@@ -9,39 +9,18 @@ const session = require('express-session')
 
 
 
-
+const reviewController = require('../controllers/review.js');
 
 
 
 
 //review post route
 
-router.post("/",isLoggedIn, validateReview,wrapAsync(async(req,res)=>{
-    
-    const reviewData = req.body.review || req.body.Review;
-    let listing = await Listing.findById(req.params.id);
-    let newReview = new Review(reviewData);
-    newReview.author = req.user._id;
-    listing.reviews.push(newReview);
-    await newReview.save();
-    await listing.save();
-    req.flash("success","review created successfully!")
-    res.redirect(`/listings/${listing._id}`)
-}))
+router.post("/",isLoggedIn, validateReview,wrapAsync(reviewController.createReview))
 
 
 //delete review route
 
-router.delete("/:reviewId",isLoggedIn,isReviewAuthor,wrapAsync(async(req,res)=>{
-    let {id,reviewId} = req.params;
-    
-    await Listing.findByIdAndUpdate(id,{$pull:{reviews:reviewId}})
-    await Review.findByIdAndDelete(reviewId)
-    req.flash("success","review deleted successfully!")
-
-    res.redirect(`/listings/${id}`)
-}
-
-))
+router.delete("/:reviewId",isLoggedIn,isReviewAuthor,wrapAsync(reviewController.destroyReview))
 
 module.exports = router;
