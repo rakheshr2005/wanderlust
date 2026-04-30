@@ -80,9 +80,10 @@
       
       <br><br>
 
-      <h2>All Reviews</h2>
-    
+      
+    <% if(listing.reviews.length >0){ %>
       <div class="row">
+        <h2>All Reviews</h2>
         <% for(review of listing.reviews){ %>
           <div class="card col-5 ms-3 mb-3">
           <h5 class="card-title"><%=review.author.username %></h5>
@@ -96,6 +97,7 @@
         <%  } %>
         
     </div>
+    <% } %>
     </div>
     <div class="row mb-5 ">
       <div class="col offset-3">
