@@ -1,4 +1,14 @@
+
+
+
+
+
 <% layout('layouts/boilerplate') %>
+
+<script>
+  let maptoken = '<%= mapToken %>';
+  let center = <%- JSON.stringify(coords) %>;
+</script>
 <div class="row mt-3">
     <div class="col-8 offset-3">
          <h2 class="show-h2"><%= listing.title %></h2>
@@ -11,15 +21,14 @@
     <p> &#x20B9;<%= listing.price.toLocaleString("en-IN") %> </p>
     <p><%= listing.location %> </p>
     <p><%= listing.country %></p>
-    
-        
-        
-
-    
   </div>
 </div>
 </div>
 </div>
+
+
+
+
 <% if(currUser && listing.owner._id.equals(currUser._id)) {%>
 <div class="btns">
     <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit</a>
@@ -88,8 +97,20 @@
         
     </div>
     </div>
-     
+    <div class="row mb-5 ">
+      <div class="col offset-3">
+        <h2>Where you'll be</h2>
+        <div id="map" ></div>
     </div>
+    </div>
+    
+    <script src="/js/map.js"></script>
+    
+    
+    
+    
+
+   
 
   
 

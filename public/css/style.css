@@ -97,3 +97,12 @@ body{
    text-transform: uppercase;
    
 }
+
+#map{
+    height:50vh;
+    width: 100vh;
+    border-radius: 1rem;
+    padding: 2rem;
+    border:1px solid black;
+    box-shadow: black;
+}

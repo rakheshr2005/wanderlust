@@ -13,12 +13,27 @@ module.exports.renderNewForm = (req,res)=>{
 
 module.exports.showListing = async (req,res)=>{
     let {id} = req.params;
+    let mapToken = process.env.MAP_API_KEY;
   const listing = await Listing.findById(id).populate({path:"reviews",populate:{path:"author"}}).populate("owner");
+   const place = listing.location;
+   const url = `https://api.maptiler.com/geocoding/${place}.json?key=${mapToken}`;
+   const result = await fetch(url);
+   const data = await result.json();
+   let coords;
+   if (data.features && data.features.length > 0) {
+  coords = data.features[0].center;
+} else {
+  coords = [77.1025, 28.7041]; // Delhi fallback
+}
+
+    coords = data.features[0].center;
+
+
   if(!listing){
-    req.flash("error","Lising no longer exists")
+    req.flash("error","Listing no longer exists")
     return res.redirect("/listings")
   }
-   res.render("LISTINGS/show.ejs",{listing})
+   res.render("LISTINGS/show.ejs",{listing,mapToken,coords})
 }
 
 module.exports.createListing = async (req,res,next)=>{
